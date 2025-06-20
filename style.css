@@ -1,0 +1,167 @@
+/* General Body Styles */
+body {
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1.7;
+    margin: 0;
+    padding: 0;
+    background: #fdfaf6;
+    color: #4a4a4a;
+}
+
+/* Header */
+header {
+    background: transparent;
+    padding: 3rem 0;
+    text-align: center;
+}
+
+header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    color: #333;
+    margin: 0;
+}
+
+/* Navigation */
+nav {
+    text-align: center;
+    padding: 1rem 0;
+    border-top: 1px solid #e0ddd7;
+    border-bottom: 1px solid #e0ddd7;
+}
+
+nav a {
+    color: #5c5c5c;
+    margin: 0 25px;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: color 0.4s ease;
+}
+
+nav a:hover {
+    color: #a88b60; /* Accent color */
+}
+
+/* Main Content */
+main {
+    padding: 20px;
+    max-width: 960px;
+    margin: 40px auto;
+}
+
+section {
+    padding: 50px 0;
+    text-align: center;
+}
+
+h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Services Section */
+#services .image-container {
+    padding: 15px;
+    border: 1px solid #e0ddd7;
+    background: #fff;
+    display: inline-block;
+}
+
+#services img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Gallery Section */
+.gallery-placeholder {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+/* Location & Hours */
+.location-hours {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    text-align: left;
+    flex-wrap: wrap;
+    gap: 40px;
+    margin-top: 30px;
+}
+
+.location-info, .hours-info {
+    flex: 1;
+    min-width: 280px;
+    padding: 25px;
+    background: #fff;
+    border: 1px solid #e0ddd7;
+    border-radius: 4px;
+}
+
+.hours-info ul {
+    list-style: none;
+    padding: 0;
+}
+
+.hours-info ul li {
+    margin-bottom: 8px;
+}
+
+h3 {
+    font-family: 'Playfair Display', serif;
+    color: #a88b60;
+    font-size: 1.5rem;
+}
+
+
+/* Contact Section */
+.social-links {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.social-links a {
+    display: inline-block;
+    margin: 0 10px;
+    padding: 10px 0;
+    text-decoration: none;
+    color: #4a4a4a;
+    font-weight: 500;
+    position: relative;
+}
+
+.social-links a::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    bottom: 0;
+    left: 0;
+    background-color: #a88b60;
+    transform: scaleX(0);
+    transition: transform 0.3s ease-out;
+}
+
+.social-links a:hover::after {
+    transform: scaleX(1);
+}
+
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 30px 0;
+    margin-top: 50px;
+    background: #f4f1ec;
+    border-top: 1px solid #e0ddd7;
+    font-size: 0.9rem;
+    color: #777;
+} 
