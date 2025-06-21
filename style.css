@@ -4,8 +4,8 @@ body {
     line-height: 1.7;
     margin: 0;
     padding: 0;
-    background: #fdfaf6;
-    color: #4a4a4a;
+    background: #2A3A2A;
+    color: #E8E6E1;
 }
 
 /* Header */
@@ -18,7 +18,7 @@ header {
 header h1 {
     font-family: 'Playfair Display', serif;
     font-size: 3.5rem;
-    color: #333;
+    color: #E8E6E1;
     margin: 0;
 }
 
@@ -26,12 +26,13 @@ header h1 {
 nav {
     text-align: center;
     padding: 1rem 0;
-    border-top: 1px solid #e0ddd7;
-    border-bottom: 1px solid #e0ddd7;
+    border-top: 1px solid #4A5D4A;
+    border-bottom: 1px solid #4A5D4A;
+    background: #556B55;
 }
 
 nav a {
-    color: #5c5c5c;
+    color: #E8E6E1;
     margin: 0 25px;
     text-decoration: none;
     font-size: 1rem;
@@ -42,7 +43,7 @@ nav a {
 }
 
 nav a:hover {
-    color: #a88b60; /* Accent color */
+    color: #C4B7A0;
 }
 
 /* Main Content */
@@ -60,22 +61,82 @@ section {
 h2 {
     font-family: 'Playfair Display', serif;
     font-size: 2.8rem;
-    color: #333;
+    color: #E8E6E1;
     margin-bottom: 20px;
 }
 
 /* Services Section */
-#services .image-container {
-    padding: 15px;
-    border: 1px solid #e0ddd7;
-    background: #fff;
-    display: inline-block;
+.services-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
 }
 
-#services img {
-    max-width: 100%;
-    height: auto;
-    display: block;
+.service-category {
+    background: #3A4A3A;
+    border: 2px solid #556B55;
+    border-radius: 8px;
+    padding: 25px;
+    text-align: left;
+    box-shadow: 0 4px 8px rgba(85, 107, 85, 0.3);
+}
+
+.service-category h3 {
+    font-family: 'Playfair Display', serif;
+    color: #C4B7A0;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    text-align: center;
+    border-bottom: 2px solid #556B55;
+    padding-bottom: 10px;
+}
+
+.service-category ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.service-category li {
+    padding: 12px 0;
+    border-bottom: 1px solid #4A5D4A;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.service-category li:last-child {
+    border-bottom: none;
+}
+
+.service-category strong {
+    color: #E8E6E1;
+    font-weight: 600;
+}
+
+.footnote {
+    font-size: 0.9rem;
+    font-style: italic;
+    color: #A8B5A8;
+    margin-top: 30px;
+}
+
+.book-now-btn {
+    display: inline-block;
+    background-color: #556B55;
+    color: #E8E6E1;
+    padding: 12px 25px;
+    margin-top: 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: background-color 0.3s ease;
+}
+
+.book-now-btn:hover {
+    background-color: #4A5D4A;
 }
 
 /* Gallery Section */
@@ -101,9 +162,23 @@ h2 {
     flex: 1;
     min-width: 280px;
     padding: 25px;
-    background: #fff;
-    border: 1px solid #e0ddd7;
+    background: #3A4A3A;
+    border: 2px solid #556B55;
     border-radius: 4px;
+}
+
+.location-info a {
+    color: #C4B7A0;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+    border-bottom: 1px solid transparent;
+}
+
+.location-info a:hover {
+    color: #E8E6E1;
+    border-bottom: 1px solid #C4B7A0;
 }
 
 .hours-info ul {
@@ -117,10 +192,9 @@ h2 {
 
 h3 {
     font-family: 'Playfair Display', serif;
-    color: #a88b60;
+    color: #C4B7A0;
     font-size: 1.5rem;
 }
-
 
 /* Contact Section */
 .social-links {
@@ -133,7 +207,7 @@ h3 {
     margin: 0 10px;
     padding: 10px 0;
     text-decoration: none;
-    color: #4a4a4a;
+    color: #E8E6E1;
     font-weight: 500;
     position: relative;
 }
@@ -145,7 +219,7 @@ h3 {
     height: 1px;
     bottom: 0;
     left: 0;
-    background-color: #a88b60;
+    background-color: #556B55;
     transform: scaleX(0);
     transition: transform 0.3s ease-out;
 }
@@ -154,14 +228,37 @@ h3 {
     transform: scaleX(1);
 }
 
+.contact-details {
+    margin-top: 40px;
+}
+
+.contact-details h3 {
+    font-size: 1.6rem;
+    color: #E8E6E1;
+}
+
+.contact-details p {
+    margin: 5px 0;
+    font-size: 1.1rem;
+}
+
+.contact-details a {
+    color: #A8B5A8;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contact-details a:hover {
+    color: #C4B7A0;
+}
 
 /* Footer */
 footer {
     text-align: center;
     padding: 30px 0;
     margin-top: 50px;
-    background: #f4f1ec;
-    border-top: 1px solid #e0ddd7;
+    background: #556B55;
+    border-top: 2px solid #4A5D4A;
     font-size: 0.9rem;
-    color: #777;
+    color: #E8E6E1;
 } 

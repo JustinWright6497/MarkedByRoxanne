@@ -1,0 +1,48 @@
+{
+    "Permanent Makeup": [
+        {
+            "name": "Brows",
+            "price": "500"
+        },
+        {
+            "name": "Lip Blushing",
+            "price": "400"
+        },
+        {
+            "name": "Tight Line Eyeliner",
+            "price": "275"
+        },
+        {
+            "name": "Winged or Smokey Eyeliner",
+            "price": "350"
+        },
+        {
+            "name": "Freckles, Natural Spread",
+            "price": "150"
+        },
+        {
+            "name": "Freckles, Small Design or Beauty Mark",
+            "price": "75"
+        }
+    ],
+    "Restorative": [
+        {
+            "name": "Inkless Stretch Mark & Scar Revision",
+            "price": "150 per session"
+        },
+        {
+            "name": "Scar Camouflage",
+            "price": "200 per session"
+        }
+    ],
+    "Tattoo": [
+        {
+            "name": "Shop Minimum",
+            "price": "75"
+        },
+        {
+            "name": "Custom Tattoo",
+            "price": "100 per hour"
+        }
+    ]
+} 
