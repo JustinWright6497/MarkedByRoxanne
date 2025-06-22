@@ -21,42 +21,29 @@
     <main>
         <section id="services">
             <h2>Services & Prices</h2>
-            <div class="services-container">
-                <div class="service-category">
-                    <h3>Permanent Makeup</h3>
-                    <ul>
-                        <li><strong>Brows:</strong> $500</li>
-                        <li><strong>Lip Blushing:</strong> $400</li>
-                        <li><strong>Tight Line Eyeliner:</strong> $275</li>
-                        <li><strong>Winged or Smokey Eyeliner:</strong> $350</li>
-                        <li><strong>Freckles, Natural Spread:</strong> $150</li>
-                        <li><strong>Freckles, Small Design or Beauty Mark:</strong> $75</li>
-                    </ul>
-                </div>
-                <div class="service-category">
-                    <h3>Restorative</h3>
-                    <ul>
-                        <li><strong>Inkless Stretch Mark & Scar Revision:</strong> $150 per session</li>
-                        <li><strong>Scar Camouflage:</strong> $200 per session</li>
-                        <li><strong>Tattoo Restoration:</strong> Consultation Required</li>
-                    </ul>
-                </div>
-                <div class="service-category">
-                    <h3>Tattoo</h3>
-                    <ul>
-                        <li><strong>Shop Minimum:</strong> $75</li>
-                        <li><strong>Custom Tattoo:</strong> $100 per hour</li>
-                    </ul>
-                </div>
+            <div class="services-container" id="services-container">
+                <!-- Services will be loaded dynamically from services.json -->
             </div>
             <p class="footnote">Prices listed above are starting prices. Consultation required for more accurate quote.</p>
             <a href="https://www.saloncbeauty.com/book-with-roxanne.html" class="book-now-btn" target="_blank">Book Now!</a>
         </section>
         <section id="gallery">
             <h2>Photo Gallery</h2>
-            <p>Coming Soon! A showcase of my latest work.</p>
-            <div class="gallery-placeholder">
-                <!-- Placeholder for gallery images -->
+            <div class="gallery-container">
+                <div class="gallery-viewer">
+                    <button class="gallery-nav prev-btn" onclick="changeImage(-1)">❮</button>
+                    <div class="main-image-container">
+                        <img id="main-image" src="" alt="Gallery Image" style="display: none;">
+                        <div id="no-images-message" class="no-images">
+                            <p>No images found in PhotoGallery folder.</p>
+                            <p>Add some photos to see them here!</p>
+                        </div>
+                    </div>
+                    <button class="gallery-nav next-btn" onclick="changeImage(1)">❯</button>
+                </div>
+                <div class="gallery-info">
+                    <span id="image-counter">0 / 0</span>
+                </div>
             </div>
         </section>
         <section id="about">
@@ -107,5 +94,199 @@
     <footer>
         <p>&copy; 2025 Marked by Roxanne. All Rights Reserved.</p>
     </footer>
+    
+    <script>
+        // Load services from services.json
+        async function loadServices() {
+            try {
+                console.log('Loading services...');
+                const response = await fetch('services.json');
+                console.log('Response status:', response.status);
+                const services = await response.json();
+                console.log('Services loaded:', services);
+                
+                const container = document.getElementById('services-container');
+                console.log('Container found:', container);
+                
+                // Clear existing content
+                container.innerHTML = '';
+                
+                // Create service categories
+                for (const [category, serviceList] of Object.entries(services)) {
+                    console.log('Processing category:', category, 'with', serviceList.length, 'services');
+                    const categoryDiv = document.createElement('div');
+                    categoryDiv.className = 'service-category';
+                    
+                    const categoryTitle = document.createElement('h3');
+                    categoryTitle.textContent = category;
+                    categoryDiv.appendChild(categoryTitle);
+                    
+                    const serviceListElement = document.createElement('ul');
+                    
+                    serviceList.forEach(service => {
+                        const listItem = document.createElement('li');
+                        listItem.innerHTML = `<strong>${service.name}:</strong> $${service.price}`;
+                        serviceListElement.appendChild(listItem);
+                    });
+                    
+                    categoryDiv.appendChild(serviceListElement);
+                    container.appendChild(categoryDiv);
+                }
+                console.log('Services loaded successfully');
+            } catch (error) {
+                console.error('Error loading services:', error);
+                // Fallback to a simple message if JSON loading fails
+                document.getElementById('services-container').innerHTML = 
+                    '<p>Services information is currently being updated. Please contact us directly for current pricing.</p>';
+            }
+        }
+        
+        // Photo Gallery functionality
+        let currentImageIndex = 0;
+        let galleryImages = [];
+        
+        async function loadGalleryImages() {
+            try {
+                console.log('Starting to load gallery images...');
+                
+                // List of actual working image files from the PhotoGallery folder
+                const sampleImages = [
+                    'PhotoGallery/BA3A7FA1-2ECD-4D00-A20B-215200E47A15.png',
+                    'PhotoGallery/D32D6566-8F6A-4359-9A07-FF51D87EECA3.jpg',
+                    'PhotoGallery/IMG_2967.jpg',
+                    'PhotoGallery/IMG_5212.jpg',
+                    'PhotoGallery/IMG_5422.jpg',
+                    'PhotoGallery/IMG_5609.jpg',
+                    'PhotoGallery/IMG_5649.jpg',
+                    'PhotoGallery/IMG_5653.jpg',
+                    'PhotoGallery/IMG_6801.jpg',
+                    'PhotoGallery/IMG_7262.jpg',
+                    'PhotoGallery/IMG_8879.jpg',
+                    'PhotoGallery/IMG_8956.jpg',
+                    'PhotoGallery/IMG_9028.jpg',
+                    'PhotoGallery/Minimal Lash Extensions Before and After Instagram Post (Your Story)(1).png',
+                    'PhotoGallery/Minimal Lash Extensions Before and After Instagram Post (Your Story)(2).png',
+                    'PhotoGallery/Minimal Lash Extensions Before and After Instagram Post (Your Story).png',
+                    'PhotoGallery/Minimal Lash Extensions Before and After Instagram Post(1).png',
+                    'PhotoGallery/Minimal Lash Extensions Before and After Instagram Post.png',
+                    'PhotoGallery/Minimal Lash Extensions Before and After Instagram Post.png(1).png',
+                    'PhotoGallery/Minimal Lash Extensions Before and After Instagram Post.png(2).png',
+                    'PhotoGallery/Minimal Lash Extensions Before and After Instagram Post.png(3).png',
+                    'PhotoGallery/Minimal Lash Extensions Before and After Instagram Post.png.png'
+                ];
+                
+                // Filter to only include images that exist
+                galleryImages = [];
+                for (let imgPath of sampleImages) {
+                    try {
+                        console.log('Checking if image exists:', imgPath);
+                        const response = await fetch(imgPath, { method: 'HEAD' });
+                        if (response.ok) {
+                            console.log('Image found:', imgPath);
+                            galleryImages.push(imgPath);
+                        } else {
+                            console.log('Image not found:', imgPath, 'Status:', response.status);
+                        }
+                    } catch (e) {
+                        console.log('Error checking image:', imgPath, e);
+                    }
+                }
+                
+                console.log('Final gallery images found:', galleryImages);
+                
+                if (galleryImages.length > 0) {
+                    displayGallery();
+                } else {
+                    showNoImagesMessage();
+                }
+            } catch (error) {
+                console.error('Error loading gallery images:', error);
+                showNoImagesMessage();
+            }
+        }
+        
+        function displayGallery() {
+            const mainImage = document.getElementById('main-image');
+            const noImagesMessage = document.getElementById('no-images-message');
+            
+            console.log('Displaying gallery with', galleryImages.length, 'images');
+            
+            // Hide no images message
+            noImagesMessage.style.display = 'none';
+            
+            // Show main image
+            mainImage.style.display = 'block';
+            
+            // Load first image
+            currentImageIndex = 0;
+            updateMainImage();
+            
+            // Update counter
+            updateImageCounter();
+            
+            // Update navigation buttons
+            updateNavigationButtons();
+        }
+        
+        function showNoImagesMessage() {
+            const mainImage = document.getElementById('main-image');
+            const noImagesMessage = document.getElementById('no-images-message');
+            
+            mainImage.style.display = 'none';
+            noImagesMessage.style.display = 'block';
+        }
+        
+        function updateMainImage() {
+            const mainImage = document.getElementById('main-image');
+            if (galleryImages.length > 0) {
+                console.log('Updating main image to:', galleryImages[currentImageIndex]);
+                mainImage.src = galleryImages[currentImageIndex];
+            }
+        }
+        
+        function updateImageCounter() {
+            const imageCounter = document.getElementById('image-counter');
+            if (galleryImages.length > 0) {
+                imageCounter.textContent = `${currentImageIndex + 1} / ${galleryImages.length}`;
+            } else {
+                imageCounter.textContent = '0 / 0';
+            }
+        }
+        
+        function updateNavigationButtons() {
+            const prevBtn = document.querySelector('.prev-btn');
+            const nextBtn = document.querySelector('.next-btn');
+            
+            if (galleryImages.length <= 1) {
+                prevBtn.disabled = true;
+                nextBtn.disabled = true;
+            } else {
+                prevBtn.disabled = false;
+                nextBtn.disabled = false;
+            }
+        }
+        
+        function changeImage(direction) {
+            if (galleryImages.length === 0) return;
+            
+            currentImageIndex += direction;
+            
+            if (currentImageIndex >= galleryImages.length) {
+                currentImageIndex = 0;
+            } else if (currentImageIndex < 0) {
+                currentImageIndex = galleryImages.length - 1;
+            }
+            
+            updateMainImage();
+            updateImageCounter();
+            updateNavigationButtons();
+        }
+        
+        // Load services and gallery when the page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadServices();
+            loadGalleryImages();
+        });
+    </script>
 </body>
 </html> 
