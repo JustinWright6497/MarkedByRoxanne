@@ -275,12 +275,12 @@ h2 {
     .gallery-viewer {
         flex-direction: column;
         gap: 15px;
-        min-height: 350px;
+        min-height: 60vh;
         position: relative;
     }
     
     .main-image-container {
-        height: 300px;
+        height: 50vh;
         max-width: 100%;
         padding: 5px;
         position: relative;
@@ -288,7 +288,11 @@ h2 {
     }
     
     #main-image {
-        max-height: 280px;
+        max-width: 100%;
+        max-height: 100%;
+        width: auto;
+        height: auto;
+        object-fit: contain;
     }
     
     .gallery-nav {
@@ -322,15 +326,11 @@ h2 {
 
 @media (max-width: 480px) {
     .gallery-viewer {
-        min-height: 300px;
+        min-height: 70vh;
     }
     
     .main-image-container {
-        height: 250px;
-    }
-    
-    #main-image {
-        max-height: 230px;
+        height: 55vh;
     }
     
     .gallery-nav {
