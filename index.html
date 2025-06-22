@@ -31,18 +31,23 @@
             <h2>Photo Gallery</h2>
             <div class="gallery-container">
                 <div class="gallery-viewer">
-                    <button class="gallery-nav prev-btn" onclick="changeImage(-1)">❮</button>
-                    <div class="main-image-container">
+                    <button class="gallery-nav prev-btn" onclick="changeImage(-1)" aria-label="Previous image">❮</button>
+                    <div class="main-image-container" id="main-image-container">
                         <img id="main-image" src="" alt="Gallery Image" style="display: none;">
                         <div id="no-images-message" class="no-images">
                             <p>No images found in PhotoGallery folder.</p>
                             <p>Add some photos to see them here!</p>
                         </div>
                     </div>
-                    <button class="gallery-nav next-btn" onclick="changeImage(1)">❯</button>
+                    <button class="gallery-nav next-btn" onclick="changeImage(1)" aria-label="Next image">❯</button>
                 </div>
                 <div class="gallery-info">
                     <span id="image-counter">0 / 0</span>
+                </div>
+                <div class="gallery-controls">
+                    <button class="gallery-control-btn" onclick="changeImage(-1)" aria-label="Previous">Previous</button>
+                    <button class="gallery-control-btn" onclick="changeImage(1)" aria-label="Next">Next</button>
+                    <button class="gallery-control-btn" onclick="toggleFullscreen()" aria-label="Fullscreen">Fullscreen</button>
                 </div>
             </div>
         </section>
@@ -144,6 +149,8 @@
         // Photo Gallery functionality
         let currentImageIndex = 0;
         let galleryImages = [];
+        let touchStartX = 0;
+        let touchEndX = 0;
         
         async function loadGalleryImages() {
             try {
@@ -208,6 +215,7 @@
         function displayGallery() {
             const mainImage = document.getElementById('main-image');
             const noImagesMessage = document.getElementById('no-images-message');
+            const mainImageContainer = document.getElementById('main-image-container');
             
             console.log('Displaying gallery with', galleryImages.length, 'images');
             
@@ -226,6 +234,12 @@
             
             // Update navigation buttons
             updateNavigationButtons();
+            
+            // Add touch/swipe support
+            addTouchSupport(mainImageContainer);
+            
+            // Add keyboard support
+            addKeyboardSupport();
         }
         
         function showNoImagesMessage() {
@@ -241,6 +255,12 @@
             if (galleryImages.length > 0) {
                 console.log('Updating main image to:', galleryImages[currentImageIndex]);
                 mainImage.src = galleryImages[currentImageIndex];
+                
+                // Add loading animation
+                mainImage.style.opacity = '0.7';
+                mainImage.onload = function() {
+                    mainImage.style.opacity = '1';
+                };
             }
         }
         
@@ -280,6 +300,79 @@
             updateMainImage();
             updateImageCounter();
             updateNavigationButtons();
+        }
+        
+        // Touch/Swipe support
+        function addTouchSupport(container) {
+            container.addEventListener('touchstart', function(e) {
+                touchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
+            
+            container.addEventListener('touchend', function(e) {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            }, { passive: true });
+        }
+        
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+            
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    // Swipe left - next image
+                    changeImage(1);
+                } else {
+                    // Swipe right - previous image
+                    changeImage(-1);
+                }
+            }
+        }
+        
+        // Keyboard support
+        function addKeyboardSupport() {
+            document.addEventListener('keydown', function(e) {
+                if (galleryImages.length === 0) return;
+                
+                switch(e.key) {
+                    case 'ArrowLeft':
+                        e.preventDefault();
+                        changeImage(-1);
+                        break;
+                    case 'ArrowRight':
+                        e.preventDefault();
+                        changeImage(1);
+                        break;
+                    case 'Escape':
+                        if (document.fullscreenElement) {
+                            document.exitFullscreen();
+                        }
+                        break;
+                }
+            });
+        }
+        
+        // Fullscreen functionality
+        function toggleFullscreen() {
+            const mainImageContainer = document.getElementById('main-image-container');
+            
+            if (!document.fullscreenElement) {
+                if (mainImageContainer.requestFullscreen) {
+                    mainImageContainer.requestFullscreen();
+                } else if (mainImageContainer.webkitRequestFullscreen) {
+                    mainImageContainer.webkitRequestFullscreen();
+                } else if (mainImageContainer.msRequestFullscreen) {
+                    mainImageContainer.msRequestFullscreen();
+                }
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen();
+                } else if (document.msExitFullscreen) {
+                    document.msExitFullscreen();
+                }
+            }
         }
         
         // Load services and gallery when the page loads
