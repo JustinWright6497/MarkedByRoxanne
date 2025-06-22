@@ -47,7 +47,7 @@
                 <div class="gallery-controls">
                     <button class="gallery-control-btn" onclick="changeImage(-1)" aria-label="Previous">Previous</button>
                     <button class="gallery-control-btn" onclick="changeImage(1)" aria-label="Next">Next</button>
-                    <button class="gallery-control-btn" onclick="toggleFullscreen()" aria-label="Fullscreen">Fullscreen</button>
+                    <button class="gallery-control-btn" onclick="toggleFullscreen()" aria-label="View Full Size" id="fullscreen-btn">View Full Size</button>
                 </div>
             </div>
         </section>
@@ -240,6 +240,9 @@
             
             // Add keyboard support
             addKeyboardSupport();
+            
+            // Update fullscreen button text based on device
+            updateFullscreenButtonText();
         }
         
         function showNoImagesMessage() {
@@ -355,7 +358,21 @@
         // Fullscreen functionality
         function toggleFullscreen() {
             const mainImageContainer = document.getElementById('main-image-container');
+            const mainImage = document.getElementById('main-image');
             
+            // Check if we're on a mobile device
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            
+            if (isMobile) {
+                // For mobile devices, open image in new tab/window
+                if (galleryImages.length > 0) {
+                    const currentImageUrl = galleryImages[currentImageIndex];
+                    window.open(currentImageUrl, '_blank');
+                }
+                return;
+            }
+            
+            // Desktop fullscreen functionality
             if (!document.fullscreenElement) {
                 if (mainImageContainer.requestFullscreen) {
                     mainImageContainer.requestFullscreen();
@@ -372,6 +389,18 @@
                 } else if (document.msExitFullscreen) {
                     document.msExitFullscreen();
                 }
+            }
+        }
+        
+        // Update fullscreen button text based on device
+        function updateFullscreenButtonText() {
+            const fullscreenBtn = document.getElementById('fullscreen-btn');
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            
+            if (isMobile) {
+                fullscreenBtn.textContent = 'View in Browser';
+            } else {
+                fullscreenBtn.textContent = 'View Full Screen';
             }
         }
         
