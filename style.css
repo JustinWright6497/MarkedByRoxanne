@@ -276,12 +276,14 @@ h2 {
         flex-direction: column;
         gap: 15px;
         min-height: 350px;
+        position: relative;
     }
     
     .main-image-container {
         height: 300px;
         max-width: 100%;
         padding: 5px;
+        position: relative;
     }
     
     #main-image {
@@ -293,23 +295,22 @@ h2 {
         height: 45px;
         font-size: 1.3rem;
         position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 10;
     }
     
     .prev-btn {
-        left: 10px;
+        top: -60px;
     }
     
     .next-btn {
-        right: 10px;
+        bottom: -60px;
     }
     
-    /* Show control buttons on mobile/tablet */
+    /* Hide control buttons on mobile */
     .gallery-controls {
-        display: flex;
-        gap: 10px;
-        margin-top: 15px;
+        display: none !important;
     }
     
     .gallery-control-btn {
@@ -338,12 +339,21 @@ h2 {
         font-size: 1.1rem;
     }
     
+    .prev-btn {
+        top: -55px;
+    }
+    
+    .next-btn {
+        bottom: -55px;
+    }
+    
     .gallery-info {
         font-size: 0.9rem;
     }
     
+    /* Hide control buttons on small mobile */
     .gallery-controls {
-        gap: 8px;
+        display: none !important;
     }
     
     .gallery-control-btn {
