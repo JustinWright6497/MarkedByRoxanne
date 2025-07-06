@@ -265,6 +265,216 @@ h2 {
     box-shadow: 0 6px 12px rgba(85, 107, 85, 0.4);
 }
 
+/* Contact Form */
+.contact-form-container {
+    max-width: 600px;
+    margin: 40px auto 0;
+    padding: 30px;
+    background: #3A4A3A;
+    background-image: 
+        linear-gradient(rgba(58, 74, 58, 0.9), rgba(58, 74, 58, 0.9)),
+        url('pics/Water-Ripple.jpg');
+    background-size: cover;
+    background-position: center;
+    border: 2px solid #556B55;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(85, 107, 85, 0.3);
+}
+
+.contact-form-container h3 {
+    text-align: center;
+    color: #C4B7A0;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #556B55;
+    padding-bottom: 15px;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-row {
+    display: flex;
+    gap: 20px;
+}
+
+.form-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    color: #E8E6E1;
+    font-weight: 500;
+    margin-bottom: 8px;
+    font-size: 1rem;
+}
+
+.form-group input,
+.form-group textarea {
+    padding: 12px;
+    border: 2px solid #556B55;
+    border-radius: 6px;
+    background: #2A3A2A;
+    color: #E8E6E1;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #C4B7A0;
+    box-shadow: 0 0 0 3px rgba(196, 183, 160, 0.2);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #A8B5A8;
+}
+
+.radio-group {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-top: 8px;
+    flex-wrap: wrap;
+}
+
+.radio-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #E8E6E1;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.radio-label input[type="radio"] {
+    display: none;
+}
+
+.radio-custom {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #556B55;
+    border-radius: 50%;
+    background: #2A3A2A;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.radio-label input[type="radio"]:checked + .radio-custom {
+    border-color: #C4B7A0;
+    background: #C4B7A0;
+}
+
+.radio-label input[type="radio"]:checked + .radio-custom::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px;
+    height: 8px;
+    background: #2A3A2A;
+    border-radius: 50%;
+}
+
+.submit-btn {
+    background: #556B55;
+    background-image: 
+        linear-gradient(rgba(85, 107, 85, 0.9), rgba(85, 107, 85, 0.9)),
+        url('pics/Water-Ripple.jpg');
+    background-size: cover;
+    background-position: center;
+    color: #E8E6E1;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+.submit-btn:hover {
+    background: #4A5D4A;
+    background-image: 
+        linear-gradient(rgba(74, 93, 74, 0.9), rgba(74, 93, 74, 0.9)),
+        url('pics/Water-Ripple.jpg');
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(85, 107, 85, 0.4);
+}
+
+.submit-btn:active {
+    transform: translateY(0);
+}
+
+/* Responsive form design */
+@media (max-width: 768px) {
+    .contact-form-container {
+        margin: 30px 20px 0;
+        padding: 25px 20px;
+    }
+    
+    .form-row {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .radio-group {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .submit-btn {
+        padding: 12px 25px;
+        font-size: 1rem;
+    }
+}
+
+/* Form Messages */
+.form-message {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 6px;
+    text-align: center;
+    font-weight: 500;
+    animation: fadeIn 0.3s ease;
+}
+
+.form-message.success {
+    background: rgba(76, 175, 80, 0.2);
+    border: 2px solid #4CAF50;
+    color: #A5D6A7;
+}
+
+.form-message.error {
+    background: rgba(244, 67, 54, 0.2);
+    border: 2px solid #F44336;
+    color: #EF9A9A;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 /* Gallery Section */
 .gallery-container {
     max-width: 800px;
