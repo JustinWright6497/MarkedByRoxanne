@@ -5,7 +5,54 @@ body {
     margin: 0;
     padding: 0;
     background: #2A3A2A;
+    background-image: 
+        linear-gradient(rgba(42, 58, 42, 0.7), rgba(42, 58, 42, 0.7)),
+        url('pics/Water-Ripple.jpg'),
+        conic-gradient(from 0deg at 20% 20%, transparent 0deg, rgba(85, 107, 85, 0.02) 90deg, transparent 180deg, rgba(196, 183, 160, 0.015) 270deg, transparent 360deg),
+        conic-gradient(from 45deg at 80% 80%, transparent 0deg, rgba(74, 93, 74, 0.03) 90deg, transparent 180deg, rgba(85, 107, 85, 0.015) 270deg, transparent 360deg),
+        conic-gradient(from 90deg at 50% 50%, transparent 0deg, rgba(196, 183, 160, 0.02) 90deg, transparent 180deg, rgba(74, 93, 74, 0.02) 270deg, transparent 360deg),
+        repeating-conic-gradient(from 0deg, transparent 0deg, rgba(85, 107, 85, 0.008) 10deg, transparent 20deg);
+    background-size: cover, cover, 800px 800px, 600px 600px, 1000px 1000px, 400px 400px;
+    background-position: center, center, 0 0, 400px 200px, 200px 400px, 300px 300px;
+    background-attachment: fixed;
     color: #E8E6E1;
+    position: relative;
+}
+
+/* Add a subtle overlay to enhance readability */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        repeating-linear-gradient(
+            0deg,
+            transparent 0px,
+            transparent 2px,
+            rgba(85, 107, 85, 0.008) 2px,
+            rgba(85, 107, 85, 0.008) 4px
+        ),
+        repeating-linear-gradient(
+            90deg,
+            transparent 0px,
+            transparent 3px,
+            rgba(196, 183, 160, 0.006) 3px,
+            rgba(196, 183, 160, 0.006) 6px
+        ),
+        repeating-linear-gradient(
+            45deg,
+            transparent 0px,
+            transparent 4px,
+            rgba(74, 93, 74, 0.004) 4px,
+            rgba(74, 93, 74, 0.004) 8px
+        );
+    background-size: 100px 100px, 150px 150px, 200px 200px;
+    background-position: 0 0, 50px 25px, 25px 50px;
+    pointer-events: none;
+    z-index: -1;
 }
 
 /* Header */
@@ -13,6 +60,22 @@ header {
     background: transparent;
     padding: 3rem 0;
     text-align: center;
+}
+
+.header-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.header-logo {
+    width: 224px !important;
+    height: 224px !important;
+    object-fit: contain;
+    padding: 4px;
 }
 
 header h1 {
@@ -29,6 +92,12 @@ nav {
     border-top: 1px solid #4A5D4A;
     border-bottom: 1px solid #4A5D4A;
     background: #556B55;
+    background-image: 
+        linear-gradient(rgba(85, 107, 85, 0.8), rgba(85, 107, 85, 0.8)),
+        url('pics/Water-Ripple.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 }
 
 nav a {
@@ -51,11 +120,29 @@ main {
     padding: 20px;
     max-width: 960px;
     margin: 40px auto;
+    position: relative;
+    z-index: 1;
 }
 
 section {
     padding: 50px 0;
     text-align: center;
+    position: relative;
+}
+
+/* Add subtle vinyl texture to sections */
+section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 20%, rgba(85, 107, 85, 0.03) 0%, transparent 30%),
+        radial-gradient(circle at 80% 80%, rgba(196, 183, 160, 0.02) 0%, transparent 30%);
+    pointer-events: none;
+    z-index: -1;
 }
 
 h2 {
@@ -75,11 +162,36 @@ h2 {
 
 .service-category {
     background: #3A4A3A;
+    background-image: 
+        radial-gradient(circle at 30% 30%, rgba(85, 107, 85, 0.1) 0%, transparent 40%),
+        radial-gradient(circle at 70% 70%, rgba(196, 183, 160, 0.05) 0%, transparent 40%);
     border: 2px solid #556B55;
     border-radius: 8px;
     padding: 25px;
     text-align: left;
     box-shadow: 0 4px 8px rgba(85, 107, 85, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Add subtle vinyl lines to service cards */
+.service-category::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 3px,
+            rgba(85, 107, 85, 0.02) 3px,
+            rgba(85, 107, 85, 0.02) 6px
+        );
+    pointer-events: none;
+    z-index: 0;
 }
 
 .service-category h3 {
@@ -90,12 +202,16 @@ h2 {
     text-align: center;
     border-bottom: 2px solid #556B55;
     padding-bottom: 10px;
+    position: relative;
+    z-index: 1;
 }
 
 .service-category ul {
     list-style: none;
     padding: 0;
     margin: 0;
+    position: relative;
+    z-index: 1;
 }
 
 .service-category li {
@@ -124,6 +240,11 @@ h2 {
 .book-now-btn {
     display: inline-block;
     background-color: #556B55;
+    background-image: 
+        linear-gradient(rgba(85, 107, 85, 0.9), rgba(85, 107, 85, 0.9)),
+        url('pics/Water-Ripple.jpg');
+    background-size: cover;
+    background-position: center;
     color: #E8E6E1;
     padding: 12px 25px;
     margin-top: 20px;
@@ -132,11 +253,16 @@ h2 {
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 1px;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .book-now-btn:hover {
     background-color: #4A5D4A;
+    background-image: 
+        linear-gradient(rgba(74, 93, 74, 0.9), rgba(74, 93, 74, 0.9)),
+        url('pics/Water-Ripple.jpg');
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(85, 107, 85, 0.4);
 }
 
 /* Gallery Section */
@@ -482,7 +608,46 @@ footer {
     padding: 30px 0;
     margin-top: 50px;
     background: #556B55;
+    background-image: 
+        linear-gradient(rgba(85, 107, 85, 0.8), rgba(85, 107, 85, 0.8)),
+        url('pics/Water-Ripple.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
     border-top: 2px solid #4A5D4A;
     font-size: 0.9rem;
     color: #E8E6E1;
+}
+
+/* Responsive design for header */
+@media (max-width: 768px) {
+    .header-content {
+        gap: 15px;
+    }
+    
+    .header-logo {
+        width: 180px !important;
+        height: 180px !important;
+        padding: 3px;
+    }
+    
+    header h1 {
+        font-size: 2.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .header-content {
+        gap: 12px;
+    }
+    
+    .header-logo {
+        width: 140px !important;
+        height: 140px !important;
+        padding: 2px;
+    }
+    
+    header h1 {
+        font-size: 2.2rem;
+    }
 } 
