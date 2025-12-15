@@ -2,11 +2,11 @@
     "Permanent Makeup": [
         {
             "name": "Brows",
-            "price": "500"
+            "price": "600"
         },
         {
             "name": "Lip Blushing",
-            "price": "400"
+            "price": "450"
         },
         {
             "name": "Tight Line Eyeliner",
@@ -42,7 +42,7 @@
         },
         {
             "name": "Custom Tattoo",
-            "price": "100 per hour"
+            "price": "120 per hour"
         }
     ]
 } 

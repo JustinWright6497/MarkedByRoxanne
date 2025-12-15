@@ -9,6 +9,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Maternity Leave Modal -->
+    <div id="maternity-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h2>Important Notice</h2>
+            <p>Roxanne is currently on maternity leave and will be returning to the salon <strong>February 1st, 2026</strong>.</p>
+            <p>Submissions are still accepted, response time may vary.</p>
+            <p>Thank you for your understanding and patience!</p>
+            <button id="modal-ok-btn" class="modal-btn">OK</button>
+        </div>
+    </div>
+    
     <header>
         <div class="header-content">
             <img src="pics/Elegant Logo Design Template With Delicate Flower Branches (Instagram Post).png.png" alt="Marked by Roxanne Logo" class="header-logo">
@@ -128,13 +139,8 @@
                 <div class="hours-info">
                     <h3>Opening Hours</h3>
                     <ul>
-                        <li><strong>Sunday:</strong> 10AM - 6PM</li>
-                        <li><strong>Monday:</strong> Closed</li>
-                        <li><strong>Tuesday:</strong> 10AM - 8PM</li>
-                        <li><strong>Wednesday:</strong> 10AM - 8PM</li>
-                        <li><strong>Thursday:</strong> 10AM - 8PM</li>
-                        <li><strong>Friday:</strong> 12PM - 8PM</li>
-                        <li><strong>Saturday:</strong> 10AM - 6PM</li>
+                        <li><strong>Fri - Mon:</strong> 12AM - 6PM</li>
+                        <li><strong>Tues - Thurs:</strong> Closed</li>
                         <li style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #556B55;"><strong>Maternity Leave:</strong> 11/17/2025 - 1/31/2026</li>
                     </ul>
                 </div>
@@ -410,8 +416,37 @@
             });
         }
         
+        // Maternity Leave Modal
+        function showMaternityModal() {
+            const modal = document.getElementById('maternity-modal');
+            const okBtn = document.getElementById('modal-ok-btn');
+            
+            // Show modal
+            modal.classList.add('show');
+            
+            // Close modal when OK button is clicked
+            okBtn.addEventListener('click', function() {
+                modal.classList.remove('show');
+            });
+            
+            // Optional: Close modal when clicking outside the content
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.classList.remove('show');
+                }
+            });
+            
+            // Optional: Close modal with Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && modal.classList.contains('show')) {
+                    modal.classList.remove('show');
+                }
+            });
+        }
+        
         // Load services and gallery when the page loads
         document.addEventListener('DOMContentLoaded', function() {
+            showMaternityModal();
             loadServices();
             loadGalleryImages();
             setupContactForm();
